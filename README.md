@@ -19,7 +19,7 @@ _instalar como dependencias_
 
 ## Instalacion de dependencias de desarrollo
 ```
-npm i @babel/preset-env @babel/cli @babel/core @babel/node nodemon react react-dom 
+npm i @babel/preset-env @babel/cli @babel/core @babel/node nodemon react react-dom -D
 ```
 ###frontend compilation 
 ```
