@@ -81,3 +81,10 @@ npm run dev
 ```
 npm run webpack
 ```
+## incluir para la compilacion un archivo llamado .babelrc
+dentro tiene el siguiente codigo para su funcionamiento 
+```
+{
+    "presets": ["@babel/preset-env","@babel/preset-react"]
+}
+```
