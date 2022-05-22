@@ -71,6 +71,13 @@ _El package.json quedaria de la siguiente manera_
 ![image](https://user-images.githubusercontent.com/66143232/169660695-52dd43ff-a390-4896-b11c-291c334bfa25.png)
 
 ##DEPLOYMENT
+## incluir para la compilacion un archivo llamado .babelrc
+dentro tiene el siguiente codigo para su funcionamiento 
+```
+{
+    "presets": ["@babel/preset-env","@babel/preset-react"]
+}
+```
 
 ##Para el backend utiliza
 ```
@@ -81,10 +88,4 @@ npm run dev
 ```
 npm run webpack
 ```
-## incluir para la compilacion un archivo llamado .babelrc
-dentro tiene el siguiente codigo para su funcionamiento 
-```
-{
-    "presets": ["@babel/preset-env","@babel/preset-react"]
-}
-```
+
