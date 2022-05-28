@@ -68,3 +68,15 @@ export const updateProducts = async(req,res) =>{
     res.json({sku,id_categoria,name,price,stock});
 
 }
+export const crearBodega = async(req,res) => {
+    const {ubicacion} = req.body
+
+    try {
+        const pool = await conn()
+        await pool.request().input('ubicacion',sql.VarChar,ubicacion).query(queries.createBodega)
+        await res.json({ubicacion})
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+}
