@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { createNewProduct, getProducts ,getProductById, deleteById, updateProducts, crearBodega, crearEstanteria, crearUsuario, crearOrdenDeCompra, crearProveedor, crearDetalleProveedor, crearDetalleOC} from "../controllers/product.controller"; 
+import { createNewProduct, getProducts ,getProductById, deleteById, updateProducts, crearBodega, crearEstanteria, crearUsuario,getUsuario, crearOrdenDeCompra, crearProveedor, crearDetalleProveedor, crearDetalleOC} from "../controllers/product.controller"; 
 
 const router = Router();
 
@@ -18,6 +18,8 @@ router.post('/bodegas',crearBodega)
 router.post('/estanterias',crearEstanteria)
 
 router.post('/usuarios', crearUsuario)
+
+router.get('/usuarios/:rut',getUsuario)
 
 router.post('/ocs', crearOrdenDeCompra)
 

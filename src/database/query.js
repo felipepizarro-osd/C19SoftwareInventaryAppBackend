@@ -7,6 +7,7 @@ export const queries = {
     createBodega: 'INSERT INTO bodega (Ubicacion) VALUES (@Ubicacion)',
     createEstanteria: 'INSERT INTO estanteria (Bodega, Modulo, Posicion, Sku_producto, Num_Prod_Guardados) VALUES (@Bodega, @Modulo, @Posicion, @Sku_producto, @Num_Prod_Guardados)',
     createUsuario: 'INSERT INTO usuario (Rut, Nombre, Contrasena) VALUES (@Rut, @Nombre, @Contrasena)',
+    getUsuario: 'SELECT * FROM usuario WHERE Rut = @Rut',
     createOCS: 'INSERT INTO Orden_De_Compra (Codigo,Fecha,Responsable,Entrada_Salida) VALUES (@Codigo,@Fecha,@Responsable,@Entrada_Salida)',
     createProveedor: 'INSERT INTO proveedor (Nombre) VALUES (@Nombre)',
     createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Codigo_Producto) VALUES (@Nombre_Prov,@Codigo_Producto)',

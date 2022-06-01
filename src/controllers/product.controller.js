@@ -127,6 +127,14 @@ export const crearUsuario = async(req,res) => {
         await res.send(error.message)
     }
 }
+export const getUsuario = async (req,res)=>{
+    const {Rut} = req.params;
+    //console.log(sku);
+    const pool = await conn();
+    const result = await pool.request().input('Rut',sql.VarChar,Rut).query(queries.getUsuario)
+    //console.log(result);
+    res.send(result)
+}
 export const crearOrdenDeCompra = async(req,res) => {
     const {Codigo,Fecha,Responsable,Entrada_Salida} = req.body
     if(Codigo == null || Fecha == null || Responsable == null || Entrada_Salida == null){
