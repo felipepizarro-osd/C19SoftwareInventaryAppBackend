@@ -198,4 +198,14 @@ export const crearDetalleOC = async(req,res) => {
         await res.send(error.message)
     }
 }
-
+export const getUsuario = async (req,res)=> {
+    try {
+        const pool = await conn();
+        const result = await pool.request().query(queries.getAllUsuarios);
+        //console.log(result);
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};

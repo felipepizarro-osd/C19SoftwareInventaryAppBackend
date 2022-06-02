@@ -10,6 +10,7 @@ export const queries = {
     createOCS: 'INSERT INTO Orden_De_Compra (Codigo,Fecha,Responsable,Entrada_Salida) VALUES (@Codigo,@Fecha,@Responsable,@Entrada_Salida)',
     createProveedor: 'INSERT INTO proveedor (Nombre) VALUES (@Nombre)',
     createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Codigo_Producto) VALUES (@Nombre_Prov,@Codigo_Producto)',
-    createDetalleOC: 'INSERT INTO Detalle_OC (Codigo_OC,Codigo_Producto,Cantidad) VALUES (@Codigo_OC,@Codigo_Producto,@Cantidad)'
+    createDetalleOC: 'INSERT INTO Detalle_OC (Codigo_OC,Codigo_Producto,Cantidad) VALUES (@Codigo_OC,@Codigo_Producto,@Cantidad)',
+    getAllUsuarios: 'SELECT * FROM usuario'
     //createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Cod_Producto) VALUES (@Nombre_Prov,@Cod_Producto) '
 }
