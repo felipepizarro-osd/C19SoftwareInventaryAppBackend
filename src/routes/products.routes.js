@@ -27,6 +27,6 @@ router.post('/proveedores/:detalle', crearDetalleProveedor)
 
 router.post('/ocs/:detalle', crearDetalleOC)
 
-router.post('/usuarios', getUsuario)
+router.get('/usuarios', getUsuario)
 
 export default router;
