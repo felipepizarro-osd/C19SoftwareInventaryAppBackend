@@ -209,3 +209,30 @@ export const getUsuario = async (req,res)=> {
         res.send(error.message);
     }
 };
+
+export const getUsuariobyRUT  = async (req,res)=>{
+    const {rut} = req.params;
+    //console.log(sku);
+    const pool = await conn();
+    const result = await pool.request().input('rut',sql.VarChar,rut).query(queries.getUsuariosByRut)
+    //console.log(result);
+    res.send(result.recordset)
+}
+
+export const getProveedor = async (req,res) =>{
+    try {
+        const pool = await conn();
+        const result = await pool.request().query(queries.getProveedores);
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+}
+
+export const getModuloYPosicionByUbicacion = async (req,res)=>{
+    const {bodega} = req.params;
+    const pool = await conn();
+    const result = await pool.request().input('bodega',sql.VarChar,bodega).query(queries.getEstanteriasByUbicacion)
+    res.send(result.recordset)
+}

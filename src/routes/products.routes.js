@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { createNewProduct, getProducts ,getProductById, deleteById, updateProducts, crearBodega, crearEstanteria, crearUsuario, crearOrdenDeCompra, crearProveedor, crearDetalleProveedor, crearDetalleOC, getUsuario} from "../controllers/product.controller"; 
+import { createNewProduct, getProducts ,getProductById, deleteById, updateProducts, crearBodega, crearEstanteria, crearUsuario, crearOrdenDeCompra, crearProveedor, crearDetalleProveedor, crearDetalleOC, getUsuario, getUsuariobyRUT, getProveedor, getModuloYPosicionByUbicacion} from "../controllers/product.controller"; 
 
 const router = Router();
 
@@ -29,4 +29,9 @@ router.post('/ocs/:detalle', crearDetalleOC)
 
 router.get('/usuarios', getUsuario)
 
+router.get('/usuarios/:rut', getUsuariobyRUT)
+
+router.get('/proveedores', getProveedor)
+
+router.get('/estanterias/:bodega', getModuloYPosicionByUbicacion)
 export default router;
