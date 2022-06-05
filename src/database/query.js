@@ -1,4 +1,3 @@
-import { getProveedor } from "../controllers/product.controller";
 
 export const queries = {
     getAllProduct:'SELECT * FROM producto',
