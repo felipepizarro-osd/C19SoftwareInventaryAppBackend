@@ -7,7 +7,7 @@ const app = express();
 
 
 //settings
-app.set('port', config.port || 3000);
+app.set('port', config.port || 4000);
 //middlewares
 app.use(morgan('dev'))
 //recibe json
