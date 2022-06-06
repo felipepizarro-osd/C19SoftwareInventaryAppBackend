@@ -1,10 +1,10 @@
 
 export const queries = {
     getAllProduct:'SELECT * FROM producto',
-    createNewProduct:'INSERT INTO producto (Sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad) VALUES (@Sku,@Nombre,@Nombre_Servicio,@Part_Number,@Stock,@Stock_min,@Unidad)',
-    getProductById:'SELECT * FROM producto WHERE Sku = @Sku ',
+    createNewProduct:'INSERT INTO producto (sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad) VALUES (@sku,@Nombre,@Nombre_Servicio,@Part_Number,@Stock,@Stock_min,@Unidad)',
+    getProductById:'SELECT * FROM producto WHERE sku = @sku ',
     deleteById:'delete FROM producto WHERE sku = @sku ',
-    updateProducts:'update producto SET Nombre=@Nombre,Nombre_Servicio=@Nombre_Servicio,Part_Number=@Part_Number,Stock=@Stock,Stock_min=@Stock_min,Unidad=@Unidad  where Sku=@Sku',
+    updateProducts:'update producto SET Nombre=@Nombre,Nombre_Servicio=@Nombre_Servicio,Part_Number=@Part_Number,Stock=@Stock,Stock_min=@Stock_min,Unidad=@Unidad  where sku=@sku',
     createBodega: 'INSERT INTO bodega (Ubicacion) VALUES (@Ubicacion)',
     createEstanteria: 'INSERT INTO estanteria (Bodega, Modulo, Posicion, Sku_producto, Num_Prod_Guardados) VALUES (@Bodega, @Modulo, @Posicion, @Sku_producto, @Num_Prod_Guardados)',
     createUsuario: 'INSERT INTO usuario (Rut, Nombre, Contrasena) VALUES (@Rut, @Nombre, @Contrasena)',
