@@ -1,3 +1,4 @@
+
 export const queries = {
     getAllProduct:'SELECT * FROM producto',
     createNewProduct:'INSERT INTO producto (Sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad) VALUES (@Sku,@Nombre,@Nombre_Servicio,@Part_Number,@Stock,@Stock_min,@Unidad)',
@@ -11,6 +12,10 @@ export const queries = {
     createOCS: 'INSERT INTO Orden_De_Compra (Codigo,Fecha,Responsable,Entrada_Salida) VALUES (@Codigo,@Fecha,@Responsable,@Entrada_Salida)',
     createProveedor: 'INSERT INTO proveedor (Nombre) VALUES (@Nombre)',
     createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Codigo_Producto) VALUES (@Nombre_Prov,@Codigo_Producto)',
-    createDetalleOC: 'INSERT INTO Detalle_OC (Codigo_OC,Codigo_Producto,Cantidad) VALUES (@Codigo_OC,@Codigo_Producto,@Cantidad)'
+    createDetalleOC: 'INSERT INTO Detalle_OC (Codigo_OC,Codigo_Producto,Cantidad) VALUES (@Codigo_OC,@Codigo_Producto,@Cantidad)',
+    getAllUsuarios: 'SELECT * FROM usuario',
+    getUsuariosByRut: 'SELECT * FROM usuario WHERE rut = @rut ',
+    getProveedores: 'SELECT * FROM proveedor',
+    getEstanteriasByUbicacion: 'SELECT estanteria.modulo,estanteria.posicion FROM estanteria WHERE bodega = @bodega'
     //createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Cod_Producto) VALUES (@Nombre_Prov,@Cod_Producto) '
 }
