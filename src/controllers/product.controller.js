@@ -11,26 +11,26 @@ export const getProducts = async (req,res)=> {
     }
 };
 export const createNewProduct = async (req,res)=>{
-    const {sku,Nombre,Nombre_Servicio,Part_Number,Stock_min,Unidad} = req.body
-    let {Stock} = req.body;
+    const {sku,nombre,nombre_servicio,part_number,stock_min,unidad} = req.body
+    let {stock} = req.body;
 
-    if (Stock == null) Stock = 0; 
+    if (stock == null) stock = 0; 
 
-    if (Nombre == null || sku == null || Nombre_Servicio == null || Part_Number == null || Stock_min == null || Unidad == null){
+    if (nombre == null || sku == null || nombre_servicio == null || part_number == null || stock_min == null || unidad == null){
         return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
     };
     console.log(req.body)
     try {
         const pool = await conn();
         await pool.request().input('sku',sql.VarChar,sku)
-        .input('Nombre', sql.VarChar,Nombre)
-        .input('Nombre_servicio',sql.VarChar,Nombre_Servicio)
-        .input('Part_Number',sql.VarChar,Part_Number)
-        .input('Stock',sql.Int,Stock)
-        .input('Stock_min',sql.Int,Stock_min)
-        .input('Unidad',sql.VarChar,Unidad).query(queries.createNewProduct);
-        console.log(sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad);
-        res.json({sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad});
+        .input('nombre', sql.VarChar,nombre)
+        .input('nombre_servicio',sql.VarChar,nombre_Servicio)
+        .input('part_number',sql.VarChar,part_number)
+        .input('stock',sql.Int,stock)
+        .input('stock_min',sql.Int,stock_min)
+        .input('unidad',sql.VarChar,unidad).query(queries.createNewProduct);
+        console.log(sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad);
+        res.json({sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad});
     } catch (error) {
         res.status(500);
         res.send(error.message);        
@@ -54,20 +54,20 @@ export const deleteById = async (req,res)=>{
 }
 export const updateProducts = async(req,res) =>{
     const {sku} = req.params;
-    const {Nombre, Nombre_Servicio, Part_Number, Stock, Stock_min, Unidad} = req.body
-    if (Nombre == null || sku == null || Nombre_Servicio == null  || Stock == null || Stock_min == null || Unidad == null){
+    const {nombre, nombre_servicio, part_number, stock, stock_min, unidad} = req.body
+    if (nombre == null || sku == null || nombre_servicio == null  || stock == null || stock_min == null || unidad == null){
         return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
     };
     const pool = await conn();
  
     await pool.request()
-    .input('Nombre',sql.VarChar,Nombre)
-    .input('Nombre_Servicio', sql.VarChar,Nombre_Servicio)
-    .input('Part_Number',sql.VarChar,Part_Number)
-    .input('Stock',sql.Int,Stock)
-    .input('Stock_min',sql.Int,Stock_min)
-    .input('Unidad',sql.VarChar,Unidad)
+    .input('nombre',sql.VarChar,nombre)
+    .input('nombre_servicio', sql.VarChar,nombre_servicio)
+    .input('part_number',sql.VarChar,part_number)
+    .input('stock',sql.Int,stock)
+    .input('stock_min',sql.Int,stock_min)
+    .input('unidad',sql.VarChar,unidad)
     .input('sku',sql.VarChar,sku).query(queries.updateProducts);
-    res.json({sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad});
+    res.json({sku,nombre,nombre_servicio,part_number,stock,stock_min,unidad});
 
 }

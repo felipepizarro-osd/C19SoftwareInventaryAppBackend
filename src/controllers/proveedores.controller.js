@@ -1,31 +1,31 @@
 import {conn,sql,queries} from '../database'
 export const crearProveedor = async(req,res) => {
-    const {Nombre} = req.body
-    if(Nombre == null){
+    const {nombre} = req.body
+    if(nombre == null){
         return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
     }
     try{
         const pool = await conn()
         await pool.request()
-        .input("Nombre",sql.VarChar,Nombre).query(queries.createProveedor)
-        await res.json({Nombre})
+        .input("nombre",sql.VarChar,nombre).query(queries.createProveedor)
+        await res.json({nombre})
     }catch(error){
         await res.status(500)
         await res.send(error.message)
     }
 }
 export const crearDetalleProveedor = async(req,res) => {
-    const {Nombre_Prov,Codigo_Producto} = req.body
-    if(Nombre_Prov == null || Codigo_Producto == null){
+    const {nombre_prov,codigo_producto} = req.body
+    if(nombre_prov == null || codigo_producto == null){
         return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
     }
     console.log(req.body)
     try {
         const pool = await conn()
         await pool.request()
-        .input("Nombre_Prov",sql.VarChar,Nombre_Prov)
-        .input("Codigo_Producto",sql.VarChar,Codigo_Producto).query(queries.createDetalleProvedor)
-        await res.json({Nombre_Prov,Codigo_Producto})
+        .input("nombre_prov",sql.VarChar,nombre_prov)
+        .input("codigo_producto",sql.VarChar,codigo_producto).query(queries.createDetalleProvedor)
+        await res.json({nombre_prov,codigo_producto})
     } catch (error) {
         await res.status(500)
         await res.send(error.message)

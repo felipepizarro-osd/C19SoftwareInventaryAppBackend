@@ -1,7 +1,7 @@
 import sql from 'mssql'
 
 const sqlConfig = {
-    database:'InventarioDB2',
+    database:'prueba2',
     user:'SA',
     password:'oreo0605',
     server: 'localhost',

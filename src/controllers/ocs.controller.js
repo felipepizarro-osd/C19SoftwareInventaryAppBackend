@@ -1,20 +1,20 @@
 import {conn,sql,queries} from '../database'
 export const crearOrdenDeCompra = async(req,res) => {
-    const {Codigo,Fecha,Responsable,Entrada_Salida} = req.body
-    if(Codigo == null || Fecha == null || Responsable == null || Entrada_Salida == null){
+    const {codigo,fecha,responsable,entrada_salida} = req.body
+    if(codigo == null || fecha == null || responsable == null || entrada_salida == null){
         return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
     }
-    if(Entrada_Salida != "Entrada" && Entrada_Salida != "Salida"){
+    if(entrada_salida != "Entrada" && entrada_salida != "Salida"){
         return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
     }
     try{
         const pool = await conn()
         await pool.request()
-        .input("Codigo", sql.VarChar,Codigo)
-        .input("Fecha",sql.Date,Fecha)
-        .input("Responsable",sql.VarChar,Responsable)
-        .input("Entrada_Salida",sql.VarChar,Entrada_Salida).query(queries.createOCS)
-        await res.json({Codigo,Fecha,Responsable,Entrada_Salida})
+        .input("codigo", sql.VarChar,codigo)
+        .input("fecha",sql.Date,fecha)
+        .input("responsable",sql.VarChar,responsable)
+        .input("entrada_salida",sql.VarChar,entrada_salida).query(queries.createOCS)
+        await res.json({codigo,fecha,responsable,entrada_salida})
 
     }catch (error){
         await res.status(500)
@@ -22,17 +22,17 @@ export const crearOrdenDeCompra = async(req,res) => {
     }
 }
 export const crearDetalleOC = async(req,res) => {
-    const {Codigo_OC,Codigo_Producto,Cantidad} = req.body
-    if(Codigo_OC == null || Codigo_Producto == null || Cantidad == null){
+    const {codigo_OC,codigo_Producto,Cantidad} = req.body
+    if(codigo_OC == null || codigo_Producto == null || Cantidad == null){
         return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
     }
     try {
         const pool = await conn()
         await pool.request()
-        .input("Codigo_OC",sql.VarChar,Codigo_OC)
-        .input("Codigo_Producto",sql.VarChar,Codigo_Producto)
+        .input("codigo_OC",sql.VarChar,codigo_OC)
+        .input("codigo_Producto",sql.VarChar,codigo_Producto)
         .input("Cantidad",sql.Float,Cantidad).query(queries.createDetalleOC)
-        await res.json({Codigo_OC,Codigo_Producto,Cantidad})
+        await res.json({codigo_OC,codigo_Producto,Cantidad})
     } catch (error) {
         await res.status(500)
         await res.send(error.message)

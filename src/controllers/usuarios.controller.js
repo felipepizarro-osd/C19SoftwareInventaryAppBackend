@@ -1,16 +1,16 @@
 import {conn,sql,queries} from '../database'
 export const crearUsuario = async(req,res) => {
-    const {Rut, Nombre, Contrasena} = req.body
-    if(Rut == null || Nombre == null || Contrasena == null){
+    const {rut, nombre, contrasena} = req.body
+    if(rut == null || nombre == null || contrasena == null){
         return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
     };
     try{
         const pool = await conn()
         await pool.request()
-        .input('Rut',sql.VarChar,Rut)
-        .input('Nombre',sql.VarChar,Nombre)
-        .input('Contrasena',sql.VarChar,Contrasena).query(queries.createUsuario)
-        await res.json({Rut, Nombre, Contrasena})
+        .input('rut',sql.VarChar,rut)
+        .input('nombre',sql.VarChar,nombre)
+        .input('contrasena',sql.VarChar,contrasena).query(queries.createUsuario)
+        await res.json({rut, nombre, contrasena})
     }catch (error){
         await res.status(500)
         await res.send(error.message)
