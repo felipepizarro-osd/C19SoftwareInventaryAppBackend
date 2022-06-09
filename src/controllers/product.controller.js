@@ -42,7 +42,7 @@ export const getProductById = async (req,res)=>{
     const pool = await conn();
     const result = await pool.request().input('sku',sql.VarChar,sku).query(queries.getProductById)
     //console.log(result);
-    await res.send(result)
+    await res.send(result.recordset[0])
 }
 export const deleteById = async (req,res)=>{
     const {sku} = req.params;
