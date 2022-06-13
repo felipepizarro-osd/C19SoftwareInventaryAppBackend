@@ -14,7 +14,7 @@ export const queries = {
     createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Codigo_Producto) VALUES (@Nombre_Prov,@Codigo_Producto)',
     createDetalleOC: 'INSERT INTO Detalle_OC (Codigo_OC,Codigo_Producto,Cantidad) VALUES (@Codigo_OC,@Codigo_Producto,@Cantidad)',
     getAllUsuarios: 'SELECT * FROM usuario',
-    getUsuario: 'SELECT * FROM usuario WHERE rut = @rut AND contrasena = @contrasena',
+    getUsuariosByRut: 'SELECT * FROM usuario WHERE rut = @rut ',
     getProveedores: 'SELECT * FROM proveedor',
     getEstanteriasByUbicacion: 'SELECT estanteria.modulo,estanteria.posicion FROM estanteria WHERE bodega = @bodega'
     //createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Cod_Producto) VALUES (@Nombre_Prov,@Cod_Producto) '
