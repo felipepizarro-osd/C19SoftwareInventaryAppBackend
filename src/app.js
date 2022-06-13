@@ -9,13 +9,20 @@ import ProveedoresRoutes from './routes/proveedores.routes'
 import morgan from "morgan";
 const path = require('path')
 const app = express();
-
+import cors from 'cors';
 
 //settings
-app.set('port', config.port || 3000);
+app.set('port', config.port || 4000);
 //middlewares
 app.use(morgan('dev'))
 //recibe json
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  
 app.use(express.json());
 //reciba formularios html
 app.use(express.urlencoded({extended:false}));
