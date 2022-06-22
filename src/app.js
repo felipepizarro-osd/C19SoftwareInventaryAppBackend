@@ -16,6 +16,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 //rutas
 app.use('/api',productRoutes)
+<<<<<<< Updated upstream
+=======
+app.use('/api',UsuariosRoutes)
+app.use('/api',EstanteriaRoutes)
+app.use('/api',OcsRoutes)
+app.use('/api',ProveedoresRoutes)
+>>>>>>> Stashed changes
 
 //static files
 console.log(path.join(__dirname,'public')); 

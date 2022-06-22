@@ -1,7 +1,11 @@
 import sql from 'mssql'
 
 const sqlConfig = {
+<<<<<<< Updated upstream
     database:'inventaryDB',
+=======
+    database:'inventaryDB3',
+>>>>>>> Stashed changes
     user:'SA',
     password:'T0m4s&&M0ncho1998',
     server: 'localhost',
