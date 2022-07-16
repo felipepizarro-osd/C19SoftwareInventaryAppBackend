@@ -7,9 +7,10 @@ import EstanteriaRoutes from './routes/estanteria.routes';
 import OcsRoutes from './routes/ocs.routes';
 import ProveedoresRoutes from './routes/proveedores.routes'
 import morgan from "morgan";
+import cors from 'cors';
 const path = require('path')
 const app = express();
-import cors from 'cors';
+const session = require('express-session');
 
 //settings
 app.set('port', config.port || 4000);
@@ -22,7 +23,12 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
-  
+
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(express.json());
 //reciba formularios html
 app.use(express.urlencoded({extended:false}));
