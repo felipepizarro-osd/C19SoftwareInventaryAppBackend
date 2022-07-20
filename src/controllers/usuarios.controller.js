@@ -35,3 +35,33 @@ export const getUsuariobyRUT  = async (req,res)=>{
     //console.log(result);
     res.send(result.recordset)
 }
+export const getUsuariobyRutPassword  = async (request,response)=>{
+    const {rut,contrasena} = request.body;
+	console.log(request.body);
+	// Ensure the input fields exists and are not empty
+	console.log("paso por aqui")
+	if (rut && contrasena) {
+		const pool = await conn();
+		// Execute SQL query that'll select the account from the database based on the specified rut and password
+		const result = await pool.request().input('rut',sql.VarChar,rut).input('contrasena',sql.VarChar,contrasena).query(queries.getUsuariosByRutContrasena)
+		console.log(result)
+			// If there is an issue with the query, output the error
+			// If the account exists
+			if (result.recordset.length > 0) {
+				// Authenticate the user
+				//request.session.loggedin = true;
+				//request.session.rut = rut;
+				// Redirect to home page
+				//response.redirect('http://localhost:3000/');
+				response.send(result.recordset[0].Nombre);
+				//console.log('entro')
+			} else {
+				response.send('Incorrect rut and/or Password!');
+			}			
+			response.end();
+		
+	} else {
+		response.send('Please enter rut and Password!');
+		response.end();
+	}
+}
