@@ -16,6 +16,8 @@ export const queries = {
     getUsuariosByRut: 'SELECT * FROM usuario WHERE rut = @rut ',
     getProveedores: 'SELECT * FROM proveedor',
     getEstanteriasByUbicacion: 'SELECT estanteria.modulo,estanteria.posicion FROM estanteria WHERE bodega = @bodega',
-    getUsuariosByRutContrasena: 'SELECT * FROM usuario WHERE rut = @rut AND contrasena=@contrasena'
+    getUsuariosByRutContrasena: 'SELECT * FROM usuario WHERE rut = @rut AND contrasena=@contrasena',
+    getBodegaByName:'SELECT * FROM Bodega WHERE UPPER(Ubicacion) = UPPER(@Ubicacion)',
+    getProveedorByName:'SELECT * FROM proveedor WHERE UPPER(Nombre) = UPPER(@Nombre)'
     //createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Cod_Producto) VALUES (@Nombre_Prov,@Cod_Producto) '
 }
