@@ -49,35 +49,47 @@ export const createNewProduct = async (req,res)=>{
     }
 }
 export const createNewProductBodega = async (req,res)=>{
-    const {sku,Nombre,Nombre_Servicio,Part_Number,Stock_min,Unidad,Bodega,Modulo,Posicion} = req.body
+    const {Sku,Nombre,Nombre_Servicio,Part_Number,Stock_min,Unidad,Bodega,Modulo,Posicion} = req.body
     let {Stock} = req.body;
     
     if (Stock == null) Stock = 0; 
 
-    if (Nombre == null || sku == null || Nombre_Servicio == null || Part_Number == null || Stock_min == null || Unidad == null){
-        return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
+    if (Nombre == null || Sku == null || Nombre_Servicio == null || Part_Number == null || Stock_min == null || Unidad == null){
+        return res.status(400).send({message:'Porfavor ingrese todos los datos'})
     };
-    console.log(req.body)
+    //console.log(req.body)
+
     try {
         const pool = await conn();
-        await pool.request().input('sku',sql.VarChar,sku)
-        .input('Nombre', sql.VarChar,Nombre)
-        .input('Nombre_servicio',sql.VarChar,Nombre_Servicio)
-        .input('Part_Number',sql.VarChar,Part_Number)
-        .input('Stock',sql.Int,Stock)
-        .input('Stock_min',sql.Int,Stock_min)
-        .input('Unidad',sql.VarChar,Unidad).query(queries.createNewProduct);
-        await pool.request().input('Bodega',sql.VarChar,Bodega)
+        const result = await pool.request().input('Bodega',sql.VarChar,Bodega)
         .input('Modulo',sql.VarChar,Modulo)
-        .input('Posicion',sql.VarChar,Posicion)
-        .input('Sku_Producto',sql.VarChar,sku)
-        .input('Num_Prod_Guardados',sql.Int,Stock).query(queries.createEstanteria)
+        .input('Posicion',sql.VarChar,Posicion).query(queries.getEstanteria)
+        console.log(result.recordset[0]);
+        if (result.recordset[0] !== Posicion ){
+            console.log('la posicion es correcta ${Posicion}');
+                await pool.request().input('Sku',sql.VarChar,Sku)
+                .input('Nombre', sql.VarChar,Nombre)
+                .input('Nombre_servicio',sql.VarChar,Nombre_Servicio)
+                .input('Part_Number',sql.VarChar,Part_Number)
+                .input('Stock',sql.Int,Stock)
+                .input('Stock_min',sql.Int,Stock_min)
+                .input('Unidad',sql.VarChar,Unidad).query(queries.createNewProduct);
+                await pool.request().input('Bodega',sql.VarChar,Bodega)
+                .input('Modulo',sql.VarChar,Modulo)
+                .input('Posicion',sql.VarChar,Posicion)
+                .input('Sku_Producto',sql.VarChar,Sku)
+                .input('Num_Prod_Guardados',sql.Int,Stock).query(queries.createEstanteria)
+                console.log(Sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad);
+                await res.json({Sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad,Bodega,Modulo,Posicion});        
+                console.log(req.body);
+        }else{
+            return res.status(400).send({message:'Posicion invalida'})
+        }
 
-        console.log(sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad);
-        await res.json({sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad,Bodega,Modulo,Posicion});
+
     } catch (error) {
-        await res.status(500);
-        await res.send(error.message);        
+        await res.status(500).send({message:'Lo sentimos, La Posicion esta ocupada'})
+                
     }
 }
 export const getProductById = async (req,res)=>{
@@ -92,7 +104,9 @@ export const deleteById = async (req,res)=>{
     const {sku} = req.params;
     //console.log(sku);
     const pool = await conn();
+    const resultDel = await pool.request().input('sku',sql.VarChar,sku).query(queries.deleteEstanteria)
     const result = await pool.request().input('sku',sql.VarChar,sku).query(queries.deleteById)
+    
     //console.log(result);
     res.send(result)
 }
