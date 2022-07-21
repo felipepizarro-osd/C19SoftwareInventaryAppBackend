@@ -57,7 +57,7 @@ export const getUsuariobyRutPassword  = async (request,response)=>{
             response.end();
         }
     }catch (error){
-        await res.status(500)
-        await res.send(error.message)
+        await response.status(500)
+        await response.send(error.message)
     }
 }
