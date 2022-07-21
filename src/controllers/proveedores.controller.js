@@ -43,3 +43,26 @@ export const getProveedor = async (req,res) =>{
     }
 }
 
+export const getProveedorByName = async (req,res)=>{
+    let nombre = req.params.nombre;
+    try {
+        const pool = await conn();
+        const result = await pool.request()
+        .input('Nombre',sql.VarChar,nombre)
+        .query(queries.getProveedorByName);
+        
+        console.log(result.recordset);
+        if (result.recordset.length == 0)
+        {
+            await pool.request()
+            .input('Nombre',sql.VarChar,nombre).query(queries.createProveedor);
+            console.log("Guardado");            
+        }
+
+        res.json(result.recordset[0])
+        
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+}

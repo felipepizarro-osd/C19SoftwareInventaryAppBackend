@@ -3,7 +3,7 @@ export const queries = {
     getAllProductEstanteria:'SELECT Producto.Sku,Producto.Nombre,Producto.Nombre_Servicio,Producto.Part_Number,Producto.Stock,Producto.Stock_min,Producto.Unidad,Estanteria.Bodega,Estanteria.Modulo,Estanteria.Posicion FROM Producto join Estanteria on Estanteria .Sku_Producto = Producto.Sku where Producto.Stock != 0',
     createNewProduct:'INSERT INTO producto (sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad) VALUES (@sku,@Nombre,@Nombre_Servicio,@Part_Number,@Stock,@Stock_min,@Unidad)',
     getProductById:'SELECT * FROM producto WHERE sku = @sku ',
-    deleteById:'delete FROM producto WHERE sku = @sku ',
+    deleteById:'delete FROM producto WHERE sku = @sku',
     updateProducts:'update producto SET Nombre=@Nombre,Nombre_Servicio=@Nombre_Servicio,Part_Number=@Part_Number,Stock=@Stock,Stock_min=@Stock_min,Unidad=@Unidad  where sku=@sku',
     createBodega: 'INSERT INTO bodega (Ubicacion) VALUES (@Ubicacion)',
     createEstanteria: 'INSERT INTO estanteria (Bodega, Modulo, Posicion, sku_producto, Num_Prod_Guardados) VALUES (@Bodega, @Modulo, @Posicion, @sku_producto, @Num_Prod_Guardados)',
@@ -16,6 +16,10 @@ export const queries = {
     getUsuariosByRut: 'SELECT * FROM usuario WHERE rut = @rut ',
     getProveedores: 'SELECT * FROM proveedor',
     getEstanteriasByUbicacion: 'SELECT estanteria.modulo,estanteria.posicion FROM estanteria WHERE bodega = @bodega',
-    getUsuariosByRutContrasena: 'SELECT * FROM usuario WHERE rut = @rut AND contrasena=@contrasena'
+    getUsuariosByRutContrasena: 'SELECT * FROM usuario WHERE rut = @rut AND contrasena=@contrasena',
+    getBodegaByName:'SELECT * FROM Bodega WHERE UPPER(Ubicacion) = UPPER(@Ubicacion)',
+    getProveedorByName:'SELECT * FROM proveedor WHERE UPPER(Nombre) = UPPER(@Nombre)',
     //createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Cod_Producto) VALUES (@Nombre_Prov,@Cod_Producto) '
-}
+    getEstanteria:'SELECT Posicion from Estanteria where Estanteria.Modulo = @Modulo and Estanteria.Posicion = @Posicion and Estanteria.Bodega = @Bodega',
+    deleteEstanteria:'delete from Estanteria where Sku_Producto = @sku'
+} 
