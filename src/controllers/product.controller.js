@@ -129,3 +129,29 @@ export const updateProducts = async(req,res) =>{
     res.json({sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad});
 
 }
+
+export const updateProducts02 = async(req,res) =>{
+    const {sku} = req.params;
+    const {Nombre, Nombre_Servicio, Part_Number, Stock, Stock_min, Unidad,retiro} = req.body
+    console.log(retiro);
+    if (Nombre == null || sku == null || Nombre_Servicio == null  || Stock == null || Stock_min == null || Unidad == null){
+        return res.status(400).json({msg:'Bad Request. Please Fill all Fields'})
+    };
+    //parsear ek stock
+    let stockNew= parseInt(Stock) - retiro;
+    String(stockNew)
+    console.log(stockNew);
+
+    const pool = await conn();
+ 
+    await pool.request()
+    .input('Nombre',sql.VarChar,Nombre)
+    .input('Nombre_Servicio', sql.VarChar,Nombre_Servicio)
+    .input('Part_Number',sql.VarChar,Part_Number)
+    .input('Stock',sql.Int,stockNew)
+    .input('Stock_min',sql.Int,Stock_min)
+    .input('Unidad',sql.VarChar,Unidad)
+    .input('sku',sql.VarChar,sku).query(queries.updateProducts);
+    res.json({sku,Nombre,Nombre_Servicio,Part_Number,stockNew,Stock_min,Unidad});
+
+}
