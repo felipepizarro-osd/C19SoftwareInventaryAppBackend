@@ -137,7 +137,7 @@ export const createNewProductBodega = async (req,res)=>{
         console.log(result.recordset[0]);
         if (result.recordset[0] !== Posicion ){
             console.log('la posicion es correcta ${Posicion}');
-                await pool.request().input('Sku',sql.VarChar,sku)
+                await pool.request().input('Sku',sql.VarChar,Sku)
                 .input('Nombre', sql.VarChar,Nombre)
                 .input('Nombre_servicio',sql.VarChar,Nombre_Servicio)
                 .input('Part_Number',sql.VarChar,Part_Number)
