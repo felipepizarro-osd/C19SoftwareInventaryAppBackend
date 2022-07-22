@@ -6,6 +6,7 @@ import UsuariosRoutes from './routes/usuarios.routes';
 import EstanteriaRoutes from './routes/estanteria.routes';
 import OcsRoutes from './routes/ocs.routes';
 import ProveedoresRoutes from './routes/proveedores.routes'
+import pypRoutes from './routes/pyp.routes'
 import morgan from "morgan";
 const path = require('path')
 const app = express();
@@ -33,6 +34,7 @@ app.use('/api',UsuariosRoutes)
 app.use('/api',EstanteriaRoutes)
 app.use('/api',OcsRoutes)
 app.use('/api',ProveedoresRoutes)
+app.use('/api',pypRoutes)
 //static files
 console.log(path.join(__dirname,'public')); 
 app.use(express.static(path.join(__dirname,'public')))

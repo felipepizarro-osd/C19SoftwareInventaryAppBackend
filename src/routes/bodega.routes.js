@@ -8,7 +8,9 @@ import {
 const router = Router();
 router.post('/bodegas',crearBodega)
 
-router.get('/bodegas/:Ubicacion',getBodegaByName)
 
 router.get('/bodegas', getBodegas)
+
+router.get('/bodegas/:Ubicacion',getBodegaByName)
+
 export default router;
