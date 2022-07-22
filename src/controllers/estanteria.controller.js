@@ -69,7 +69,7 @@ export const crearEstanteriaX = async(req,res) => {
 }
 
 export const deleteByCombinacion = async (req,res)=>{
-    const {Bodega,Modulo,Posicion,Sku_Producto, Num_Prod_Guardados} = req.body;
+    const {Bodega,Modulo,Posicion,Sku_Producto,Num_Prod_Guardados} = req.body;
 
     console.log("Que Ingreso al Delete",req.body);
 
