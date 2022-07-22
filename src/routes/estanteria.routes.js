@@ -4,4 +4,6 @@ import { crearEstanteria,  getModuloYPosicionByUbicacion } from "../controllers/
 const router = Router();
 router.post('/estanterias',crearEstanteria)
 router.get('/estanterias/:bodega', getModuloYPosicionByUbicacion)
+
+
 export default router;

@@ -24,6 +24,7 @@ export const queries = {
     deleteEstanteria:'delete from Estanteria where Sku_Producto = @sku',
     getOC:'select * from Orden_de_compra join Detalle_OC  ON Orden_de_compra.Codigo = Detalle_OC.Codigo_OC JOIN Producto on Producto.Sku = Detalle_OC.Codigo_Producto',
     getOrdenes:'select * from Orden_de_compra',
-    getPOC:'select Producto.Sku,Producto.Nombre,Producto.Nombre_Servicio,Producto.Part_Number,Producto.Stock,Producto.Stock_min,Producto.Unidad,Estanteria.Bodega,Estanteria.Modulo,Estanteria.Posicion from Detalle_OC join Producto on Producto.Sku = Detalle_OC.Codigo_Producto  join Estanteria on Estanteria.Sku_Producto = Producto.Sku where Detalle_OC.Codigo_OC = @Codigo'
-
+    getPOC:'select Producto.Sku,Producto.Nombre,Producto.Nombre_Servicio,Producto.Part_Number,Producto.Stock,Producto.Stock_min,Producto.Unidad,Estanteria.Bodega,Estanteria.Modulo,Estanteria.Posicion from Detalle_OC join Producto on Producto.Sku = Detalle_OC.Codigo_Producto  join Estanteria on Estanteria.Sku_Producto = Producto.Sku where Detalle_OC.Codigo_OC = @Codigo',
+    updateStock:'UPDATE Producto SET Stock = @Stock WHERE Producto.Sku = @sku'
+    
 } 

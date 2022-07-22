@@ -57,3 +57,5 @@ export const getProduct = async (req,res)=>{
     console.log(result);
     await res.send(result.recordset)
 }
+
+//
