@@ -25,6 +25,8 @@ export const queries = {
     getBodegas:'SELECT * FROM Bodega',
     crearEstanteriaX:'INSERT INTO Estanteria (Bodega,Modulo,Posicion,Sku_Producto,Num_Prod_Guardados) VALUES (@Bodega,@Modulo,@Posicion,@Sku_Producto,@Num_Prod_Guardados)',
     getEstanteria:'SELECT * FROM Estanteria',
+    getPyP:'SELECT * FROM Detalle_Proveedor',
+    deleteByCombinacionPYP:'delete from Detalle_Proveedor where(Nombre_Prov=@Nombre_Prov) AND (Codigo_Producto=@Codigo_Producto)',
     deleteByCombinacion:'delete from Estanteria where(Bodega=@Bodega) AND (Modulo=@Modulo) AND (Posicion=@Posicion)AND (Sku_Producto=@Sku_Producto) AND (Num_Prod_Guardados=@Num_Prod_Guardados)'
-
+    
 } 
