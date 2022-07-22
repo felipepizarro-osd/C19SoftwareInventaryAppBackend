@@ -80,7 +80,7 @@ export const createNewProductOrder = async (req,res)=>{
             .input('Posicion',sql.VarChar,Posicion).query(queries.getEstanteria)
             console.log(Posicion);
             console.log(result.recordset.length);
-            if (result.recordset.length === 0){
+            if (result.recordset.length !== 0){
                 console.log('la posicion es correcta ${Posicion}');
                 try {
                     await pool.request().input('Sku',sql.VarChar,Sku)
@@ -90,17 +90,14 @@ export const createNewProductOrder = async (req,res)=>{
                     .input('Stock',sql.Int,Stock_nuevo)
                     .input('Stock_min',sql.Int,Stock_min)
                     .input('Unidad',sql.VarChar,Unidad).query(queries.createNewProduct);
-                    console.log('pado el producto');
                     await pool.request().input('Bodega',sql.VarChar,Bodega)
                     .input('Modulo',sql.VarChar,Modulo)
                     .input('Posicion',sql.VarChar,Posicion)
                     .input('Sku_Producto',sql.VarChar,Sku)
                     .input('Num_Prod_Guardados',sql.Int,Stock).query(queries.createEstanteria)
-                    console.log('yo no se ma;ana');
                     console.log(Sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad);
                     
                     await pool.request().input('Codigo_OC',sql.VarChar,codigo).input('Codigo_Producto',sql.VarChar,Sku).input('Cantidad',sql.Int,Cant).query(queries.createDetalleOC)
-                    console.log('paso');
 
                     await res.json({Sku,Nombre,Nombre_Servicio,Part_Number,Stock,Stock_min,Unidad,Bodega,Modulo,Posicion});    
                 } catch (error) {
@@ -137,7 +134,7 @@ export const createNewProductBodega = async (req,res)=>{
         console.log(result.recordset[0]);
         if (result.recordset[0] !== Posicion ){
             console.log('la posicion es correcta ${Posicion}');
-                await pool.request().input('Sku',sql.VarChar,sku)
+                await pool.request().input('Sku',sql.VarChar,Sku)
                 .input('Nombre', sql.VarChar,Nombre)
                 .input('Nombre_servicio',sql.VarChar,Nombre_Servicio)
                 .input('Part_Number',sql.VarChar,Part_Number)
