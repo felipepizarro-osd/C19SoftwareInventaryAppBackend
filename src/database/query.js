@@ -21,5 +21,10 @@ export const queries = {
     getProveedorByName:'SELECT * FROM proveedor WHERE UPPER(Nombre) = UPPER(@Nombre)',
     //createDetalleProvedor: 'INSERT INTO detalle_proveedor (Nombre_Prov,Cod_Producto) VALUES (@Nombre_Prov,@Cod_Producto) '
     getEstanteria:'SELECT Posicion from Estanteria where Estanteria.Modulo = @Modulo and Estanteria.Posicion = @Posicion and Estanteria.Bodega = @Bodega',
-    deleteEstanteria:'delete from Estanteria where Sku_Producto = @sku'
+    deleteEstanteria:'delete from Estanteria where Sku_Producto = @sku',
+    getBodegas:'SELECT * FROM Bodega',
+    crearEstanteriaX:'INSERT INTO Estanteria (Bodega,Modulo,Posicion,Sku_Producto,Num_Prod_Guardados) VALUES (@Bodega,@Modulo,@Posicion,@Sku_Producto,@Num_Prod_Guardados)',
+    getEstanteria:'SELECT * FROM Estanteria',
+    deleteByCombinacion:'delete from Estanteria where(Bodega=@Bodega) AND (Modulo=@Modulo) AND (Posicion=@Posicion)AND (Sku_Producto=@Sku_Producto) AND (Num_Prod_Guardados=@Num_Prod_Guardados)'
+
 } 
