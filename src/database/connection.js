@@ -1,9 +1,9 @@
 import sql from 'mssql'
 
 const sqlConfig = {
-    database:'prueba1',
+    database:'InventarioDB',
     user:'SA',
-    password:'casz',
+    password:'T0m4s&&M0ncho1998',
     server: 'localhost',
     pool: {
       max: 10,
