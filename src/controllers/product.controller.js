@@ -1,26 +1,41 @@
 import {conn,sql,queries} from '../database'
 export const getProducts = async (req,res)=> {
     try {
+        console.log('entro a getProducts');
         const pool = await conn();
         const result = await pool.request().query(queries.getAllProduct);
-        //console.log(result);
+        console.log(result);
         res.json(result.recordset)
     } catch (error) {
         res.status(500);
         res.send(error.message);
     }
 };
-export const getProductsEstanteria = async (req,res)=> {
+/*export const getProductsEstanteria = async (req,res)=> {
+    console.log('entro a getProductsEstanteria');
     try {
         const pool = await conn();
         const result = await pool.request().query(queries.getAllProductEstanteria);
-        //console.log(result);
+        console.log(result);
         await res.json(result.recordset)
     } catch (error) {
         await res.status(500);
         await res.send(error.message);
     }
-
+};*/
+export const getProductsEstanteria = async (req,res)=> {
+    console.log('entro a getProductsEstanteria');
+    try {
+        const client = await conn();
+        try{
+            const result = await client.query(queries.getAllProductEstanteria);
+            res.json(result.rows);
+        } finally {
+            client.release();
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 };
 export const createNewProduct = async (req,res)=>{
     const {sku,Nombre,Nombre_Servicio,Part_Number,Stock_min,Unidad} = req.body
