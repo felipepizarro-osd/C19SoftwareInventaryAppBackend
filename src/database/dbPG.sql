@@ -62,4 +62,3 @@ CREATE TABLE Detalle_Proveedor (
     CONSTRAINT Detalle_Proveedor_fk0 FOREIGN KEY (Nombre_Prov) REFERENCES Proveedor(Nombre) ON UPDATE CASCADE,
     CONSTRAINT Detalle_Proveedor_fk1 FOREIGN KEY (Codigo_Producto) REFERENCES Producto(Sku) ON UPDATE CASCADE
 );
-
