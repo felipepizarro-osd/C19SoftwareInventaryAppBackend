@@ -168,5 +168,6 @@ export const queries_pg = {
         AND 
             Sku_Producto = $4 
         AND 
-            Num_Prod_Guardados = $5`
+            Num_Prod_Guardados = $5`,
+    searchOC: `SELECT * FROM Orden_de_compra as orden WHERE orden.Codigo = $1 `
 }
