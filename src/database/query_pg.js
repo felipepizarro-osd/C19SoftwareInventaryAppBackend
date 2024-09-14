@@ -168,5 +168,8 @@ export const queries_pg = {
         AND 
             Sku_Producto = $4 
         AND 
-            Num_Prod_Guardados = $5`
-}
+            Num_Prod_Guardados = $5`,
+    
+    searchProveedor: `Select * from Proveedor where Codigo_Proveedor = $1`
+}   
+    
