@@ -1,28 +1,18 @@
 import { Pool } from 'pg';
-const conf = require("dotenv").config();
+require('dotenv').config();
 
-const sqlConfig = {
+
+const client = new Pool({
     user: process.env.user,
     host: process.env.host,
     database: process.env.database,
     password: process.env.password,
-    port: process.env.port_db, 
-    max: 10, // Número máximo de conexiones en el pool
-    idleTimeoutMillis: 30000, // Tiempo antes de cerrar una conexión ociosa
-    connectionTimeoutMillis: 2000, // Tiempo de espera para establecer una nueva conexión
-};
+    port: process.env.port_db,
+});
 
-export async function conn() {
-    const pool = new Pool(sqlConfig);
-    try {
-        const client = await pool.connect();
-        if(client){
-            console.log("Conexion establecida correctamente");
-        }
-        return client;
-    } catch (err) {
-        console.error('Error al conectar a la base de datos', err);
-    }
-}
+client.connect()
+    .then(() => console.log("Conexión exitosa a la base de datos"))
+    .catch(err => console.error("Error al conectar a la base de datos", err));
 
-export { Pool };
+
+module.exports = client;
