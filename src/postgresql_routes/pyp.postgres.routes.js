@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {crearDetalleProveedor,getPyP,deleteByCombinacionPYP} from "../controllers/pyp.controller";  
+import {crearDetalleProveedor,getPyP,deleteByCombinacionPYP} from "../controllers_pg/pyp.controller.pg";  
 
 const router = Router();
 
