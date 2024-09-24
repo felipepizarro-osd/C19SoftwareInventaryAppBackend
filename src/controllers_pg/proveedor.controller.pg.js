@@ -1,9 +1,9 @@
 import {queries_pg} from '../database/query_pg';
-import {conn, queries_pg, sql} from '../database';
+const pool = require('../database/connectionPG');
 
 const getProveedor =async (req,res) => {
     try {
-        const client = await conn();
+        const client = await pool.connect();
         try{
             const result = await client.query(queries_pg.getProveedores);
             console.log("Entregado los proveedores");
@@ -23,7 +23,7 @@ const createProveedor = async(req,res) => {
         return res.status(400).json({ msg: 'Error de petición, informacion es requerida' });
     }
     try {
-        const client = await conn();
+        const client = await pool.connect();
         try{
             const result = await client.query(queries_pg.createProveedor,[cod_proveedor,nombre_Proveedor,cod_producto]);
             if(result){
@@ -45,7 +45,7 @@ const searchProveedorById = async(req,res) => {
         return res.status(400).json({ msg: 'Error de petición, codigo de proveedor es requerida' });
     }
     try {
-        const client = await conn();
+        const client = await pool.connect();
         try{
             const result = await client.query(queries_pg.searchProveedor,[codigo_proveedor]);
             if(result){

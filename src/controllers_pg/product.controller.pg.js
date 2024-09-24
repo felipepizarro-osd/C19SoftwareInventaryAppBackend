@@ -1,11 +1,12 @@
-import {conn, queries_pg, sql} from '../database';
-import {queries_pg_, queries_pgpg} from '../database/query_pg';
-export const getProductsEstanteria = async (req,res)=> {
-    console.log('entro a getProductsEstanteria');
+import {queries_pg} from '../database/query_pg';
+const pool = require('../database/connectionPG');
+
+
+const getProductsEstanteria = async (req,res)=> {
     try {
-        const client = await conn();
+        const client = await pool.connect();
         try{
-            const result = await client.query(queries_pg_pg.getAllProductEstanteria);
+            const result = await client.query(queries_pg.getAllProductEstanteria);
             res.json(result.rows);
         } finally {
             client.release();
@@ -14,23 +15,25 @@ export const getProductsEstanteria = async (req,res)=> {
         res.status(500).send(error.message);
     }
 };
-export const getProducts = async (req,res)=> {
-    console.log('entro a getProducts');
+const getProducts = async (req, res) => {
+    let client;
     try {
-        const client = await conn();
-        try{
-            const result = await client.query(queries_pg_pg.getAllProduct);
-            res.json(result.rows);
-        } finally {
-            client.release();
-        }
+        client = await pool.connect(); // Conexión al pool
+        const result = await client.query(queries_pg.getAllProduct);
+        res.json(result.rows);  // Enviar respuesta si la consulta es exitosa
     } catch (error) {
-        res.status(500).send(error.message);
+        // Enviar respuesta de error si algo sale mal
+        if (!res.headersSent) {
+            res.status(500).send(error.message);
+        }
+    } finally {
+        if (client) {
+            client.release(); // Asegurarse de liberar el cliente
+        }
     }
-}
-//TODO: Implementar nuevas reglas de negocio
+};
 
-export const createNewProduct = async (req, res) => {
+const createNewProduct = async (req, res) => {
     const { sku, nombre, nombre_servicio, part_number, stock_min, unidad } = req.body;
     let { stock } = req.body;
 
@@ -43,7 +46,7 @@ export const createNewProduct = async (req, res) => {
     console.log(req.body);
 
     try {
-        const client = await conn();
+        const client = await pool.connect();
         console.log('Connected to database');
         try {
             // Obtener columnas de la tabla "producto"
@@ -55,7 +58,7 @@ export const createNewProduct = async (req, res) => {
             const columnResult = await client.query(columnQuery);
             console.log('Columnas de la tabla "producto":', columnResult.rows);
 
-            const queryText = queries_pg_pg.createNewProduct; // Asegúrate de que la consulta esté definida correctamente
+            const queryText = queries_pg.createNewProduct; // Asegúrate de que la consulta esté definida correctamente
             console.log(queryText);
             const values = [sku, nombre, nombre_servicio, part_number, stock, stock_min, unidad];
             console.log(values);
@@ -72,7 +75,7 @@ export const createNewProduct = async (req, res) => {
 };
 
 
-export const createNewProductOrder = async (req, res) => {
+const createNewProductOrder = async (req, res) => {
     const { codigo } = req.params;
     const { Sku, Nombre, Nombre_Servicio, Part_Number, Stock_min, Unidad, Bodega, Modulo, Posicion } = req.body;
     let { Stock } = req.body;
@@ -89,7 +92,7 @@ export const createNewProductOrder = async (req, res) => {
     console.log(req.params);
 
     try {
-        const client = await conn();  // Establece la conexión a la base de datos PostgreSQL
+        const client = await pool.connect();  // Establece la conexión a la base de datos PostgreSQL
         if (!client) return res.status(500).send({ message: 'Error de conexión' });
         else {
             console.log('Conectado a la base de datos');
@@ -147,3 +150,10 @@ export const createNewProductOrder = async (req, res) => {
         return res.status(500).send({ message: 'Lo sentimos, la posición está ocupada o hubo un error de conexión' });
     }
 };
+
+module.exports = {
+    createNewProductOrder,
+    createNewProduct,
+    getProducts,
+    getProductsEstanteria
+}
