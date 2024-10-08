@@ -1,5 +1,4 @@
 import {conn, queries_pg, sql} from '../database';
-import {queries_pg_, queries_pgpg} from '../database/query_pg';
 export const getProductsEstanteria = async (req,res)=> {
     console.log('entro a getProductsEstanteria');
     try {

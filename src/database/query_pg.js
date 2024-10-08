@@ -1,3 +1,5 @@
+import { updateBodega } from "../controllers_pg/bodega.controller.pg";
+
 export const queries_pg = {
     getAllProduct: 'SELECT * FROM producto',
     getAllProductEstanteria: `
@@ -149,7 +151,7 @@ export const queries_pg = {
             (Bodega, Modulo, Posicion, Sku_Producto, Num_Prod_Guardados) 
         VALUES 
             ($1, $2, $3, $4, $5)`,
-    getEstanteria: 'SELECT * FROM Estanteria',
+    getAllEstanterias: 'SELECT * FROM estanteria',
     getPyP: 'SELECT * FROM Detalle_Proveedor',
     deleteByCombinacionPYP: `
         DELETE FROM Detalle_Proveedor 

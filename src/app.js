@@ -9,6 +9,7 @@ import ProveedoresRoutes from './routes/proveedores.routes'
 import pypRoutes from './routes/pyp.routes';
 import productroutesPG from './postgresql_routes/products.routes';
 import BodegasRoutesPG from './postgresql_routes/bodegas.postgres.routes';
+import EstanteriaRoutesPG from './postgresql_routes/Estanterias.postgres.routes';
 import morgan from "morgan";
 const path = require('path')
 const app = express();
@@ -39,6 +40,7 @@ app.use('/api',ProveedoresRoutes)
 app.use('/api',pypRoutes)
 app.use('/api',productroutesPG)
 app.use('/api',BodegasRoutesPG)
+app.use('/api',EstanteriaRoutesPG)
 //static files
 console.log(path.join(__dirname,'public')); 
 app.use(express.static(path.join(__dirname,'public')))
