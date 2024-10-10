@@ -77,12 +77,8 @@ export const queries_pg = {
             (Codigo, Fecha, Responsable, Entrada_Salida) 
         VALUES 
             ($1, $2, $3, $4)`,
-    createProveedor: 'INSERT INTO proveedor (Nombre) VALUES ($1)',
-    createDetalleProvedor: `
-        INSERT INTO detalle_proveedor 
-            (Nombre_Prov, Codigo_Producto) 
-        VALUES 
-            ($1, $2)`,
+    createProveedor: 'INSERT INTO proveedor (cod_proveedor, nombre_proveedor) VALUES ($1, $2)',
+    createDetalleProvedor: `INSERT INTO detalle_proveedor (cod_proveedor, cod_producto) VALUES ($1, $2)`,
     createDetalleOC: `
         INSERT INTO Detalle_OC 
             (Codigo_OC, Codigo_Producto, Cantidad) 
@@ -156,9 +152,9 @@ export const queries_pg = {
     deleteByCombinacionPYP: `
         DELETE FROM Detalle_Proveedor 
         WHERE 
-            Nombre_Prov = $1 
-        AND 
-            Codigo_Producto = $2`,
+            cod_proveedor = $1
+            AND 
+            cod_producto = $2`,
     deleteByCombinacion: `
         DELETE FROM Estanteria 
         WHERE 
@@ -170,5 +166,9 @@ export const queries_pg = {
         AND 
             Sku_Producto = $4 
         AND 
-            Num_Prod_Guardados = $5`
-}
+            Num_Prod_Guardados = $5`,
+    
+    searchProveedor: `Select * from Proveedor where cod_proveedor = $1`,
+    BuscarOC: 'SELECT * FROM orden_de_compra WHERE codigo = $1'
+}   
+    

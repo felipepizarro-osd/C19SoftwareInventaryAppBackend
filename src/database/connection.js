@@ -2,6 +2,9 @@ import sql from 'mssql'
 import dotenv from 'dotenv';
 
 dotenv.config();
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const sqlConfig = {
     database: process.env.MSSQL_DATABASE,

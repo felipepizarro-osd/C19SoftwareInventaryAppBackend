@@ -1,5 +1,5 @@
 import app from "./app"
-import './database/connection'
+import './database/connectionPG'
 app.listen(app.get('port'));
 
 console.log('server on port ',app.get('port'));
