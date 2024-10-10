@@ -5,6 +5,5 @@ const router = Router();
 
 router.get("/postgres/all_ocs",getOCS);
 router.post("/postgres/create_oc",createOC);
-router.get("/postgres/oc_pg",searchOC);
-
+router.get("/postgres/ocs", searchOC);
 export default router;

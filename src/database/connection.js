@@ -1,20 +1,23 @@
 import sql from 'mssql'
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const sqlConfig = {
-    database:'InventarioDB',
-    user:'SA',
-    password:'T0m4s&&M0ncho1998',
-    server: 'localhost',
+    database: process.env.MSSQL_DATABASE,
+    user: process.env.MSSQL_USER,
+    password: process.env.MSSQL_PASSWORD,
+    server: process.env.MSSQL_SERVER,
     pool: {
-      max: 10,
-      min: 0,
-      idleTimeoutMillis: 30000
+        max: parseInt(process.env.MSSQL_POOL_MAX),
+        min: parseInt(process.env.MSSQL_POOL_MIN),
+        idleTimeoutMillis: parseInt(process.env.MSSQL_IDLE_TIMEOUT)
     },
     options: {
-      encrypt: true, // for azure
-      trustServerCertificate: true // change to true for local dev / self-signed certs
+        encrypt: process.env.MSSQL_ENCRYPT === 'true', // Para Azure
+        trustServerCertificate: process.env.MSSQL_TRUST_SERVER_CERTIFICATE === 'true' // Para certificados locales
     }
-  }
+};
   
   export async function conn() {
    try {
