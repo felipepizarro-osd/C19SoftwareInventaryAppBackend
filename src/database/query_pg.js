@@ -1,4 +1,3 @@
-import { updateBodega } from "../controllers_pg/bodega.controller.pg";
 
 export const queries_pg = {
     getAllProduct: 'SELECT * FROM producto',
@@ -169,6 +168,8 @@ export const queries_pg = {
             Num_Prod_Guardados = $5`,
     
     searchProveedor: `Select * from Proveedor where cod_proveedor = $1`,
-    BuscarOC: 'SELECT * FROM orden_de_compra WHERE codigo = $1'
+    BuscarOC: 'SELECT * FROM orden_de_compra WHERE codigo = $1',
+    deleteBodega: 'DELETE FROM Bodega WHERE Ubicacion = $1',
+    updateBodega: 'UPDATE Bodega SET Ubicacion = $1 WHERE Ubicacion = $2'
 }   
     
